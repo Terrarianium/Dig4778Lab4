@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,10 +7,12 @@ public class BigMeteor : MonoBehaviour
 {
     private int hitCount = 0;
 
+    public static event Action<bool> BigMeteorAlive;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        BigMeteorAlive?.Invoke(true);
     }
 
     // Update is called once per frame
@@ -24,6 +27,7 @@ public class BigMeteor : MonoBehaviour
 
         if (hitCount >= 5)
         {
+            BigMeteorAlive?.Invoke(false);
             Destroy(this.gameObject);
         }
     }
