@@ -12,14 +12,14 @@ public class GameManager : MonoBehaviour
 
     public int meteorCount = 0;
 
-    // Start is called before the first frame update
+  
     void Start()
     {
         Instantiate(playerPrefab, transform.position, Quaternion.identity);
         InvokeRepeating("SpawnMeteor", 1f, 2f);
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if (gameOver)

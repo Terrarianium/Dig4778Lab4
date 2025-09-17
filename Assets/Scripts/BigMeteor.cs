@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO: Refactor Meteor.cs and BigMeteor.cs into an inheritance relation
+
 public class BigMeteor : MonoBehaviour
 {
     private int hitCount = 0;
