@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO: Refactor Movement() from Shooting()
 public class Player : MonoBehaviour
 {
 
@@ -16,15 +15,15 @@ public class Player : MonoBehaviour
     void Update()
     {
         Movement();
-    
     }
 
     void Movement()
     {
         transform.Translate(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * Time.deltaTime * speed);
 
-        // Loops the player back on screen
-        if (transform.position.x > horizontalScreenLimit || transform.position.x <= -horizontalScreenLimit)
+        // Loops the player back on screen (Default)
+        /*
+         * if (transform.position.x > horizontalScreenLimit || transform.position.x <= -horizontalScreenLimit)
         {
             transform.position = new Vector3(transform.position.x * -1f, transform.position.y, 0);
         }
@@ -32,6 +31,8 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, transform.position.y * -1, 0);
         }
+        */
+
     }
 
 }

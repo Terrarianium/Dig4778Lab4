@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO: Refactor Meteor.cs and BigMeteor.cs into an inheritance relation
 
-public class BigMeteor : MonoBehaviour
+
+/*public class BigMeteor : MonoBehaviour
 {
     private int hitCount = 0;
 
@@ -47,4 +47,33 @@ public class BigMeteor : MonoBehaviour
             Destroy(whatIHit.gameObject);
         }
     }
+}*/
+
+public class BigMeteor : MeteorBase
+{
+    private int hitCount = 0;
+    public static event Action<bool> BigMeteorAlive;
+
+    protected override float moveSpeed => 0.5f;
+
+    private void Start()
+    {
+        BigMeteorAlive?.Invoke(true);
+    }
+
+    protected override void HandleLaserHit(Collider2D laser)
+    {
+        hitCount++;
+        Destroy(laser.gameObject);
+    }
+
+    protected override void CustomUpdate()
+    {
+        if (hitCount >= 5)
+        {
+            BigMeteorAlive?.Invoke(false);
+            DestroyMeteor();
+        }
+    }
 }
+

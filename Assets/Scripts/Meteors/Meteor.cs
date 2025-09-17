@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO: Refactor Meteor.cs and BigMeteor.cs into an inheritance relation
 
-public class Meteor : MonoBehaviour
+
+/* public class Meteor : MonoBehaviour
 {
     void Update()
     {
@@ -30,4 +30,9 @@ public class Meteor : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+}*/
+
+public class Meteor : MeteorBase
+{
+
 }
