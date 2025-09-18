@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 
 
@@ -53,12 +54,14 @@ public class BigMeteor : MeteorBase
 {
     private int hitCount = 0;
     public static event Action<bool> BigMeteorAlive;
+    private CinemachineImpulseSource impulseSource;
 
     protected override float moveSpeed => 0.5f;
 
     private void Start()
     {
         BigMeteorAlive?.Invoke(true);
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     protected override void HandleLaserHit(Collider2D laser)
@@ -72,6 +75,7 @@ public class BigMeteor : MeteorBase
         if (hitCount >= 5)
         {
             BigMeteorAlive?.Invoke(false);
+            impulseSource.GenerateImpulse();
             DestroyMeteor();
         }
     }
