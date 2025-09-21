@@ -44,6 +44,10 @@ public class CameraManager : MonoBehaviour
     private void BigMeteorActions(bool bigMeteor)
     {
         StartCoroutine(Zoom(bigMeteor));
+        if (!bigMeteor)
+        {
+            StartCoroutine("ScreenShake");
+        }
     }
 
     private IEnumerator Zoom(bool grow)
@@ -57,12 +61,23 @@ public class CameraManager : MonoBehaviour
             }
         } else
         {
-            yield return new WaitForSeconds(1);
             while (freeLookCamera.m_Orbits[1].m_Radius > normalZoom)
             {
                 freeLookCamera.m_Orbits[1].m_Radius -= Time.deltaTime * zoomRate;
                 yield return null;
             }
+        }
+    }
+
+    private IEnumerator ScreenShake()
+    {
+        float shakeTime = 1f;
+
+        while (shakeTime > 0f)
+        {
+            freeLookCamera.m_Heading.m_Bias = Random.Range(-shakeTime * 5, shakeTime * 5);
+            shakeTime -= Time.deltaTime;
+            yield return null;
         }
     }
 }
